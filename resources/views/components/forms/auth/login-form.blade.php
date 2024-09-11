@@ -17,9 +17,13 @@
         required
     />
 
-    <div>
+    <div class="flex flex-col gap-2">
         <x-ui.primary-button type="submit">
             Sign in
         </x-ui.primary-button>
+
+        <span class="text-sm">
+            Don't have an account? <a class="underline" href="{{route('register')}}">Sign Up</a>
+        </span>
     </div>
 </form>
