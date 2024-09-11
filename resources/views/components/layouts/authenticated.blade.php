@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
+    <title>{{ $title ?? 'Social Publishing Platform' }}</title>
     @vite('resources/css/app.css')
 </head>
-<body class="antialiased">
-<h1 class="text-3xl font-bold underline">
-    Hello world!
-</h1>
+<body>
+<x-header/>
+<main class="px-2 md:px-0 container mx-auto">
+    {{ $slot }}
+</main>
 </body>
 </html>
