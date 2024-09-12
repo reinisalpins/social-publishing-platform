@@ -1,4 +1,4 @@
-<form class="space-y-6" action="{{ route('register.submit') }}" method="POST">
+<form class="space-y-6" action="{{ route('register.attempt') }}" method="POST">
     @csrf
     <x-ui.input
         type="email"

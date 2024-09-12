@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\DataTransferObjects\CreateUserData;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
@@ -17,8 +18,12 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    public function getUserData(): array
+    public function getData(): CreateUserData
     {
-        return $this->only('email', 'name', 'password');
+        return new CreateUserData(
+            name: $this->input('name'),
+            email: $this->input('email'),
+            password: $this->input('password')
+        );
     }
 }

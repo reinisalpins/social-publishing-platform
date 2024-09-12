@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? 'Social Publishing Platform' }}</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
 <main class="px-2 md:px-0 container mx-auto">

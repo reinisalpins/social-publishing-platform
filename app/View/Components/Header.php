@@ -4,11 +4,20 @@ declare(strict_types=1);
 
 namespace App\View\Components;
 
+use App\Models\Category;
+use App\Repositories\CategoryRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
 class Header extends Component
 {
+    public function __construct(
+        private readonly CategoryRepository $categoryRepository,
+    )
+    {
+    }
+
     public function render(): View
     {
         return view('components.header', [
@@ -16,12 +25,9 @@ class Header extends Component
         ]);
     }
 
-    protected function getCategories(): array
+    /** @return Collection<Category> */
+    protected function getCategories(): Collection
     {
-        return [
-            ['name' => 'Technology', 'slug' => 'technology'],
-            ['name' => 'Travel', 'slug' => 'travel'],
-            ['name' => 'Food', 'slug' => 'food'],
-        ];
+        return $this->categoryRepository->getAllCategories();
     }
 }

@@ -1,4 +1,4 @@
-<form class="space-y-6" action="{{ route('login.submit') }}" method="POST">
+<form class="space-y-6" action="{{ route('login.attempt') }}" method="POST">
     @csrf
     <x-ui.input
         type="email"
@@ -23,7 +23,7 @@
         </x-ui.primary-button>
 
         <span class="text-sm">
-            Don't have an account? <a class="underline" href="{{route('register')}}">Sign Up</a>
+            Don't have an account? <a class="underline" href="{{route('register.index')}}">Sign Up</a>
         </span>
     </div>
 </form>

@@ -12,4 +12,9 @@ class FeedController extends Controller
     {
         return view('pages.feed');
     }
+
+    public function category(): View
+    {
+        return view('pages.feed');
+    }
 }

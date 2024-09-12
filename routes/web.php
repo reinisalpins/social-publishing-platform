@@ -1,30 +1,36 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FeedController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class, 'attemptLogin'])->name('login.submit');
-    
-    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register', [AuthController::class, 'attemptRegister'])->name('register.submit');
+    Route::prefix('login')->group(function () {
+        Route::get('/', [LoginController::class, 'index'])->name('login');
+        Route::post('/', [LoginController::class, 'attempt'])->name('login.attempt');
+    });
+
+    Route::prefix('register')->name('register.')->group(function () {
+        Route::get('/', [RegisterController::class, 'index'])->name('index');
+        Route::post('/', [RegisterController::class, 'attempt'])->name('attempt');
+    });
 });
 
-
 Route::middleware('auth')->group(function () {
-    Route::get('/', [FeedController::class, 'index'])->name('feed');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::redirect('/', '/feed');
+
+    Route::prefix('feed')->name('feed.')->group(function () {
+        Route::get('/', [FeedController::class, 'index'])->name('index');
+        Route::get('/category/{slug}', [FeedController::class, 'category'])->name('category');
+    });
+
+//    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+    Route::prefix('posts')->name('posts.')->group(function () {
+        Route::get('/create', [PostController::class, 'create'])->name('create');
+        Route::post('/', [PostController::class, 'store'])->name('store');
+        Route::get('/manage', [PostController::class, 'manage'])->name('manage');
+    });
 });

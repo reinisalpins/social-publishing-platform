@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\DataTransferObjects\CreateUserData;
 use App\Models\User;
 
 class UserRepository
@@ -14,8 +15,14 @@ class UserRepository
     {
     }
 
-    public function createUser(array $payload): User
+    public function createUser(CreateUserData $data): User
     {
+        $payload = [
+            'name' => $data->name,
+            'email' => $data->email,
+            'password' => $data->password,
+        ];
+
         return $this->user->create($payload);
     }
 }
