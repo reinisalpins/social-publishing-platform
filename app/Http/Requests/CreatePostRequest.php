@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\DataTransferObjects\CreatePostData;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SavePostRequest extends FormRequest
+class CreatePostRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -16,7 +16,7 @@ class SavePostRequest extends FormRequest
             'categories.*' => [
                 'required',
                 'integer',
-//                'exists:categories,id',
+                'exists:categories,id',
             ],
         ];
     }

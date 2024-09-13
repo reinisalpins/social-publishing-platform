@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostController;
@@ -26,7 +27,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/category/{slug}', [FeedController::class, 'category'])->name('category');
     });
 
-//    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
     Route::prefix('posts')->name('posts.')->group(function () {
         Route::get('/create', [PostController::class, 'create'])->name('create');
