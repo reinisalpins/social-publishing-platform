@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
-use App\DataTransferObjects\CreatePostData;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatePostRequest extends FormRequest
+class UpdatePostRequest extends FormRequest
 {
     public function rules(): array
     {
         return [
+            'post_id' => ['required', 'integer', 'exists:posts,id'],
             'title' => ['required', 'max:255', 'string'],
             'content' => ['required', 'string'],
             'categories' => ['required', 'array', 'min:1'],
@@ -19,15 +21,5 @@ class CreatePostRequest extends FormRequest
                 'exists:categories,id',
             ],
         ];
-    }
-
-    public function getData(): CreatePostData
-    {
-        return new CreatePostData(
-            title: $this->input('title'),
-            content: $this->input('content'),
-            userId: $this->user()->getId(),
-            categoryIds: $this->input('categories'),
-        );
     }
 }
