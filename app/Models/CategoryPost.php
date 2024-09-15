@@ -12,9 +12,4 @@ class CategoryPost extends Model
         'category_id',
         'post_id',
     ];
-
-    public function postRelation(): BelongsTo
-    {
-        return $this->belongsTo(Post::class);
-    }
 }
