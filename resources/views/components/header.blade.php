@@ -6,17 +6,17 @@
                 <span class="mx-auto text-xl font-black leading-none text-gray-900 select-none">Social Publishing Platform</span>
             </a>
             <nav
-                class="flex flex-wrap items-center mb-5 text-base md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
-                <a href="{{route('posts.index')}}" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Feed</a>
+                class="flex gap-5 justify-center flex-wrap items-center mb-5 text-base md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
+                <a href="{{route('posts.index')}}" class="font-medium leading-6 text-gray-600 hover:text-gray-900">Feed</a>
                 @foreach($categories as $category)
                     <a href="{{ route('posts.category', $category->getSlug()) }}"
-                       class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">
+                       class="font-medium leading-6 text-gray-600 hover:text-gray-900">
                         {{ $category->getName() }}
                     </a>
                 @endforeach
             </nav>
         </div>
-        <div class="inline-flex items-center ml-5 space-x-6 lg:justify-end">
+        <div class="inline-flex mt-5 md:mt-0 items-center md:ml-5 space-x-6 lg:justify-end">
             <a href="{{route('profile.index')}}"
                class="text-base font-medium leading-6 text-gray-600 whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-900">
                 Profile

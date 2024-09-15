@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,5 +38,10 @@ class Comment extends Model
     public function relatedUser(): User
     {
         return $this->user;
+    }
+
+    public function getCreatedAt(): Carbon
+    {
+        return $this->getAttribute('created_at');
     }
 }

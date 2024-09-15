@@ -8,7 +8,7 @@
 </head>
 <body>
 <x-header/>
-<main class="px-4 max-w-[1440px] mx-auto mt-10">
+<main class="px-4 max-w-[1440px] mx-auto mt-10 mb-5">
     {{ $slot }}
 </main>
 </body>
