@@ -13,7 +13,6 @@
             name="{{ $name }}"
             rows="{{ $rows }}"
             placeholder="{{ $placeholder }}"
-            {{ $required ? 'required' : '' }}
             {{ $attributes->merge(['class' => 'flex w-full px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-500 focus:border-neutral-300']) }}
         >{{ old($name, $attributes->get('value')) }}</textarea>
     </div>

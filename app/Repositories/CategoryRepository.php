@@ -19,4 +19,9 @@ class CategoryRepository
     {
         return $this->category->all();
     }
+
+    public function getBySlug(string $slug): Category
+    {
+        return $this->category->where('slug', '=', $slug)->firstOrFail();
+    }
 }

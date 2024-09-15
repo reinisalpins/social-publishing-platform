@@ -6,7 +6,7 @@
         </div>
 
         <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-            <x-forms.auth.login-form/>
+            @include('partials.forms.auth.login')
             @if($errors->any())
                 <x-ui.alert class="mt-5" type="error">
                     <x-slot:title>

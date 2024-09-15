@@ -3,39 +3,46 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\FeedController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::prefix('login')->group(function () {
-        Route::get('/', [LoginController::class, 'index'])->name('login');
-        Route::post('/', [LoginController::class, 'attempt'])->name('login.attempt');
-    });
+    Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
-    Route::prefix('register')->name('register.')->group(function () {
-        Route::get('/', [RegisterController::class, 'index'])->name('index');
-        Route::post('/', [RegisterController::class, 'attempt'])->name('attempt');
-    });
+    Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 });
 
 Route::middleware('auth')->group(function () {
-    Route::redirect('/', '/feed');
+    Route::redirect('/', '/posts');
 
-    Route::prefix('feed')->name('feed.')->group(function () {
-        Route::get('/', [FeedController::class, 'index'])->name('index');
-        Route::get('/category/{slug}', [FeedController::class, 'category'])->name('category');
-    });
-
-    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+    Route::post('/logout', [LogoutController::class, 'store'])->name('logout.store');
 
     Route::prefix('posts')->name('posts.')->group(function () {
+        Route::get('/', [PostController::class, 'index'])->name('index');
+        Route::get('/category/{slug}', [PostController::class, 'category'])->name('category');
+        Route::get('/search', [PostController::class, 'search'])->name('search');
+        Route::get('/user/{user_id}', [PostController::class, 'userPosts'])->name('user');
+
         Route::get('/create', [PostController::class, 'create'])->name('create');
         Route::post('/', [PostController::class, 'store'])->name('store');
         Route::get('/manage', [PostController::class, 'manage'])->name('manage');
 
+        Route::get('/{post_id}', [PostController::class, 'show'])->name('show');
+        Route::get('/{post_id}/edit', [PostController::class, 'edit'])->name('edit');
+        Route::patch('/{post_id}', [PostController::class, 'update'])->name('update');
         Route::delete('/{post_id}', [PostController::class, 'destroy'])->name('destroy');
 
-        Route::get('/{post_id}/edit', [PostController::class, 'edit'])->name('edit');
+        Route::post('/{post_id}/comments', [CommentController::class, 'store'])->name('comments.store');
+        Route::delete('/comments/{comment_id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    });
+
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::patch('/', [ProfileController::class, 'update'])->name('update');
+        Route::patch('/password', [ProfileController::class, 'updatePassword'])->name('password.update');
     });
 });

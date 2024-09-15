@@ -1,7 +1,14 @@
 <x-layouts.authenticated>
+    @if(session('success'))
+        <x-ui.alert type="success" title="Success" class="mb-7">
+            {{session('success')}}
+        </x-ui.alert>
+    @endif
+
     <h1 class="font-bold text-2xl mb-6">Edit post</h1>
-    <div class="flex p-6 shadow-sm border border-neutral-300 rounded-md mx-auto flex-col">
-        <x-forms.posts.edit-form :categories="$categories" :post="$post"/>
+    <div>
+        @include('partials.forms.posts.edit', ['post' => $post, 'categories' => $categories])
+
         @if($errors->any())
             <x-ui.alert class="mt-5" type="error">
                 <x-slot:title>

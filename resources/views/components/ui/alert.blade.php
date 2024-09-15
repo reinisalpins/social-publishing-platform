@@ -4,7 +4,7 @@
     $baseClasses = "relative w-full rounded-lg border border-transparent p-4 [&>svg]:absolute [&>svg]:text-foreground [&>svg]:left-4 [&>svg]:top-4 [&>svg+div]:translate-y-[-3px] [&:has(svg)]:pl-11 text-white";
     $typeClasses = [
         'info' => 'bg-blue-600',
-        'success' => 'bg-green-600',
+        'success' => 'bg-green-800',
         'warning' => 'bg-yellow-600',
         'error' => 'bg-red-600',
     ];
