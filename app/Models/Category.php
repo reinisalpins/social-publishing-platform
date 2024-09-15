@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /** @mixin Builder */
 class Category extends Model
 {
+    protected $fillable = ['name'];
+
     public function getId(): int
     {
         return $this->getAttribute('id');
