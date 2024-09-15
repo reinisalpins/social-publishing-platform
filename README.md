@@ -71,6 +71,15 @@ This will install the necessary Node.js dependencies and build your frontend ass
 
 The application should now be running. You can access it at `http://localhost`.
 
+### Login
+
+To access the features, use the following credentials:
+
+```
+Email: admin@example.com
+Password: password
+```
+
 ## Development
 
 To stop the Docker environment:
@@ -84,3 +93,5 @@ For frontend development, you can use:
 ```bash
 ./vendor/bin/sail npm run dev
 ```
+
+This will start the Vite development server and watch for changes in your frontend files.
