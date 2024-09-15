@@ -45,6 +45,7 @@ class PostRepository
         return $this->post
             ->where('user_id', '=', $userId)
             ->with(['categories', 'user'])
+            ->orderBy('created_at', 'desc')
             ->get();
     }
 

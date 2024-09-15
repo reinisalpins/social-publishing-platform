@@ -15,9 +15,10 @@ class CategoryRepository
     {
     }
 
+    /** @return Collection<Category> */
     public function getAllCategories(): Collection
     {
-        return $this->category->all();
+        return $this->category->get();
     }
 
     public function getBySlug(string $slug): Category

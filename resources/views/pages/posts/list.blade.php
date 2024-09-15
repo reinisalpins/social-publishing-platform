@@ -13,7 +13,7 @@
         <h1 class="font-bold text-2xl mb-10">Posts by: {{$user->getName()}}</h1>
     @endif
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
         @forelse($posts as $post)
             @include('partials.cards.posts.post', ['post' => $post])
         @empty

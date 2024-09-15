@@ -80,4 +80,9 @@ class Post extends Model
     {
         return $this->user;
     }
+
+    public function getUserId(): int
+    {
+        return $this->getAttribute('user_id');
+    }
 }

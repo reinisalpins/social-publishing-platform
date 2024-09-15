@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\CheckCommentOwnership;
+use App\Http\Middleware\CheckPostOwnership;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -32,12 +34,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/manage', [PostController::class, 'manage'])->name('manage');
 
         Route::get('/{post_id}', [PostController::class, 'show'])->name('show');
-        Route::get('/{post_id}/edit', [PostController::class, 'edit'])->name('edit');
-        Route::patch('/{post_id}', [PostController::class, 'update'])->name('update');
-        Route::delete('/{post_id}', [PostController::class, 'destroy'])->name('destroy');
+
+        Route::middleware(CheckPostOwnership::class)->group(function () {
+            Route::get('/{post_id}/edit', [PostController::class, 'edit'])->name('edit');
+            Route::patch('/{post_id}', [PostController::class, 'update'])->name('update');
+            Route::delete('/{post_id}', [PostController::class, 'destroy'])->name('destroy');
+        });
 
         Route::post('/{post_id}/comments', [CommentController::class, 'store'])->name('comments.store');
-        Route::delete('/comments/{comment_id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+        Route::middleware(CheckCommentOwnership::class)
+            ->delete('/comments/{comment_id}', [CommentController::class, 'destroy'])
+            ->name('comments.destroy');
     });
 
     Route::prefix('profile')->name('profile.')->group(function () {

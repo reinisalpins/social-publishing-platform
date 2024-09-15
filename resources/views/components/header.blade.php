@@ -9,7 +9,7 @@
                 class="flex flex-wrap items-center mb-5 text-base md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
                 <a href="{{route('posts.index')}}" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Feed</a>
                 @foreach($categories as $category)
-                    <a href="{{ route('posts.category', $category->slug) }}"
+                    <a href="{{ route('posts.category', $category->getSlug()) }}"
                        class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">
                         {{ $category->getName() }}
                     </a>

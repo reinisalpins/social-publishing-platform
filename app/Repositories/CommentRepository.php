@@ -32,4 +32,9 @@ class CommentRepository
 
         $comment->delete();
     }
+
+    public function getById(int $commentId): Comment
+    {
+        return $this->comment->findOrFail($commentId);
+    }
 }
