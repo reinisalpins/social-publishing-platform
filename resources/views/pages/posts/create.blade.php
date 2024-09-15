@@ -1,7 +1,7 @@
 <x-layouts.authenticated>
     <h1 class="font-bold text-2xl mb-6">Create Post</h1>
     <div>
-        @include('partials.forms.posts.create', ['$categories' => $categories])
+        @include('partials.forms.posts.create', ['categories' => $categories])
 
         @if($errors->any())
             <x-ui.alert class="mt-5" type="error">
