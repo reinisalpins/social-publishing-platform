@@ -21,7 +21,7 @@ class UpdatePasswordRequest extends FormRequest
     {
         return new UpdateUserPasswordData(
             user: $this->user(),
-            password: $this->input('current_password')
+            password: $this->input('new_password')
         );
     }
 
